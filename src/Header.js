@@ -8,6 +8,8 @@ import homeIcon from "./assets/images/home.png"; // 홈 아이콘 이미지
 function Header() {
   const [displayName, setDisplayName] = useState("");
   const navigate = useNavigate();
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false); // 로그아웃 팝업 상태
+  const [popupVisible, setPopupVisible] = useState(false);
 
   useEffect(() => {
     if (auth.currentUser) {
@@ -21,7 +23,21 @@ function Header() {
     }
   }, [auth.currentUser]);
 
-  const handleLogout = () => {
+  // const handleLogout = () => {
+  //   auth
+  //     .signOut()
+  //     .then(() => {
+  //       navigate("/login");
+  //     })
+  //     .catch((error) => {
+  //       console.error("로그아웃 실패:", error);
+  //     });
+  // };
+  // const handleLogoutClick = () => {
+  //   setShowLogoutPopup(true); // 로그아웃 팝업 표시
+  // };
+
+  const handleLogoutConfirm = () => {
     auth
       .signOut()
       .then(() => {
@@ -30,6 +46,24 @@ function Header() {
       .catch((error) => {
         console.error("로그아웃 실패:", error);
       });
+    setShowLogoutPopup(false); // 팝업 닫기
+  };
+
+  // 팝업을 숨기는 함수
+  const closePopup = () => {
+    // 먼저 fadeOut 애니메이션을 시작
+    setShowLogoutPopup(false);
+
+    // 애니메이션 지속 시간 이후에 팝업 요소를 완전히 숨김
+    setTimeout(() => {
+      setPopupVisible(false);
+    }, 500); // 애니메이션 지속 시간과 일치
+  };
+
+  // 팝업을 표시하는 함수
+  const openPopup = () => {
+    setPopupVisible(true);
+    setShowLogoutPopup(true);
   };
 
   return (
@@ -45,11 +79,25 @@ function Header() {
             <Link to="/login">로그인</Link>
           </li>
         ) : (
-          <li className="logout" onClick={handleLogout}>
-            <a href="#">로그아웃</a>
+          <li className="logout" onClick={openPopup}>
+            <a>로그아웃</a>
           </li>
         )}
       </ul>
+      {popupVisible && (
+        <div className={`layer_wrap ${!showLogoutPopup ? "fadeOut" : ""}`}>
+          <div className="layerpop">
+            <p className="pop_text">로그아웃 하시겠습니까?</p>
+            <p className="pop_btn">
+              <button onClick={handleLogoutConfirm}>확인</button>
+              <button id="closePopup" onClick={closePopup}>
+                취소
+              </button>
+            </p>
+          </div>
+        </div>
+      )}
+
       {auth.currentUser && (
         <p className="top_name">
           <span>{displayName}</span>님 안녕하세요!
