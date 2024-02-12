@@ -47,7 +47,7 @@ function WriteForm() {
 
   useEffect(() => {
     if (postId) {
-      // 수정 모드일 경우 기존 게시글 데이터를 불러옵니다.
+      // 수정 모드일 경우 기존 게시글 데이터를 불러오기
       const postRef = doc(db, "posts", postId);
       getDoc(postRef).then((docSnap) => {
         if (docSnap.exists()) {
@@ -55,7 +55,7 @@ function WriteForm() {
           setTitle(postData.title);
           setContent(postData.content);
           setCategory(postData.category);
-          // 이미지 처리가 필요하면 여기에 추가
+          // 이미지 처리 추가
         } else {
           console.log("게시글이 존재하지 않습니다.");
           navigate("/");
@@ -74,17 +74,17 @@ function WriteForm() {
 
     try {
       if (postId) {
-        // postId가 있는 경우, 기존 게시글을 업데이트합니다.
+        // postId가 있으면 기존 게시글을 업데이트
         const postRef = doc(db, "posts", postId);
         await updateDoc(postRef, {
           title,
           content,
           category,
           image: imagePreview,
-          // createdAt는 업데이트 하지 않음
+          // createdAt는 업데이트 안함
         });
       } else {
-        // postId가 없는 경우, 새 게시글을 추가합니다.
+        // postId가 없으면 새 게시글을 추가
         await addDoc(collection(db, "posts"), {
           title,
           content,

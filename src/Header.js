@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, db } from "./firebaseConfig"; // db를 가져옴
+import { auth, db } from "./firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import logo from "./assets/images/logo.png";
-import homeIcon from "./assets/images/home.png"; // 홈 아이콘 이미지
+import homeIcon from "./assets/images/home.png";
 
 function Header() {
   const [displayName, setDisplayName] = useState("");
@@ -49,9 +49,9 @@ function Header() {
     setShowLogoutPopup(false); // 팝업 닫기
   };
 
-  // 팝업을 숨기는 함수
+  // 팝업숨김
   const closePopup = () => {
-    // 먼저 fadeOut 애니메이션을 시작
+    // fadeOut 애니메이션 시작
     setShowLogoutPopup(false);
 
     // 애니메이션 지속 시간 이후에 팝업 요소를 완전히 숨김

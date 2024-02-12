@@ -94,7 +94,7 @@ function PostDetail() {
   };
 
   const handlePostEdit = () => {
-    navigate(`/edit/${postId}`); // 게시글 수정 페이지로 이동 (URL은 예시입니다)
+    navigate(`/edit/${postId}`); // 게시글 수정 페이지로 이동
   };
 
   // 댓글 수정 시작
@@ -105,14 +105,11 @@ function PostDetail() {
 
   // 댓글 수정 완료
   const finishEditComment = async (commentId) => {
-    // Firestore 업데이트 로직 추가
     setEditingCommentId(null);
   };
 
   // 댓글 삭제
-  const deleteComment = async (commentId) => {
-    // Firestore 삭제 로직 추가
-  };
+  const deleteComment = async (commentId) => {};
 
   if (!post) return <div>Loading...</div>;
 

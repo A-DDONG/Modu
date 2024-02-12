@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { auth } from "./firebaseConfig";
-import "./css/layout.css"; // 가정된 CSS 파일 임포트
+import "./css/layout.css"; //
 
 function MainPage() {
   const [posts, setPosts] = useState([]);

@@ -61,7 +61,6 @@ function Login() {
     try {
       const result = await signInWithGooglePopup();
       const { displayName, email, uid } = result.user;
-      // 필요한 정보만 state로 전달
       navigate("/", { state: { displayName, email, uid } });
     } catch (error) {
       console.error(error);
